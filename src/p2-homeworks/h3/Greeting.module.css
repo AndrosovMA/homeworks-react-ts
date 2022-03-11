@@ -5,3 +5,8 @@
 .error {
     border: 1px solid red;
 }
+
+.error_message {
+    color: red;
+}
+
