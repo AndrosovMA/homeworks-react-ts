@@ -9,7 +9,6 @@ function HW5() {
             {/*<HashRouter>*/}
 
             <Header/>
-
             <Routes/>
 
             {/*</HashRouter>*/}

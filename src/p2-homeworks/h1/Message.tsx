@@ -7,12 +7,19 @@ function Message(props: MessageType) {
 
     return (
         <div className={styles.container}>
-            <img src={props.avatar} className={styles.avatar} alt=""/>
+            <div className={styles.container_avatar}>
+                <img src={props.avatar} className={styles.avatar} alt=""/>
+            </div>
+
+
+            <div className={styles.corner}> </div>
+
             <div className={styles.innerText}>
                 <div className={styles.name}>{props.name}</div>
                 <div> {props.message}</div>
                 <div className={styles.time}> {props.time}</div>
             </div>
+
 
         </div>
     )
