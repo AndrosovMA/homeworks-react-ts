@@ -13,5 +13,7 @@ code {
 }
 
 .active {
-    color: blue;
+    color: #61dafb;
+    border-radius: 20px;
+    background-color: #056b7c;
 }
