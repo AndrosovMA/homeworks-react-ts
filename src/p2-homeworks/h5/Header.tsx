@@ -9,6 +9,7 @@ function Header() {
             <div><NavLink to={PATH.JUNIOR}>Junior</NavLink></div>
             <div> <NavLink to={PATH.JUNIOR_PLUS}>JuniorPlus</NavLink></div>
             <div> <NavLink to={PATH.COUNTER}>Counter</NavLink></div>
+            <div> <NavLink to={PATH.EXAM}>Exam</NavLink></div>
         </div>
     )
 }

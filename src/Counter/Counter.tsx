@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
+import {SettingsCounter} from "./SettingsCounter";
+import {Button} from "./Button";
 
 
 export function Counter() {
 
-    const setLocalStorageMaxValue = (value:number) => {
+    const setLocalStorageMaxValue = (value: number) => {
         let stringNumber = String(value)
         localStorage.setItem('maxValue', stringNumber)
     }
-    const getLocalStorageMaxValue = ()=> {
-        let value =  localStorage.getItem('maxValue');
+    const getLocalStorageMaxValue = () => {
+        let value = localStorage.getItem('maxValue');
         return Number(value)
     }
 
@@ -16,7 +18,6 @@ export function Counter() {
     const [startValue, setStartValue] = useState<number>(0)
 
     const [displayValue, setDisplayValue] = useState<number>(0);
-
     const [isMaxValue, setIsMaxValue] = useState<boolean>(false);
     const [correctInputValue, setCorrectInputValue] = useState(true);
 
@@ -30,10 +31,10 @@ export function Counter() {
         setDisplayValue(0);
         setIsMaxValue(false);
     }
-    const changeMaxValue = (e: any) => {
+    const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         let currentValue = Number(e.currentTarget.value);
 
-        if (currentValue < 0 && currentValue  > -2) {
+        if (currentValue < 0 && currentValue > -2) {
             setMaxValue(currentValue)
             setCorrectInputValue(false);
         } else if (currentValue > startValue) {
@@ -46,7 +47,7 @@ export function Counter() {
             setCorrectInputValue(false);
         }
     }
-    const changeStartValue = (e: any) => {
+    const changeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         let currentValue = Number(e.currentTarget.value);
 
         if (currentValue < 0 && currentValue > -2) {
@@ -62,7 +63,7 @@ export function Counter() {
             setCorrectInputValue(true);
         }
     }
-    const setParameters = ()=> {
+    const setParameters = () => {
         resetValueCounter();
         setDisplayValue(startValue);
     }
@@ -70,48 +71,34 @@ export function Counter() {
     return (
         <div className='wrapper'>
             <div className='container-counter'>
-                <div className={correctInputValue?'counter__display': 'counter__display incorrectDisplay'}>
+                <div className={correctInputValue ? 'counter__display' : 'counter__display incorrectDisplay'}>
                     <div>
                         <span className={!isMaxValue ? 'display__number' : 'display__numberEnd'}>
-                            {correctInputValue? displayValue: <div className='incorrectDisplay'>Incorrect value</div>}
+                            {correctInputValue ? displayValue : <div className='incorrectDisplay'>Incorrect value</div>}
                         </span>
                     </div>
                 </div>
                 <div className='counter__button'>
-                    <input type='button'
-                           className='inc'
-                           disabled={isMaxValue}
-                           onClick={incrementValueCounter}
-                           value='inc'/>
-                    <input type='button' className='reset' onClick={resetValueCounter} value='reset'/>
+                    <Button disabled={isMaxValue}
+                            action={incrementValueCounter}
+                            value='inc'
+                            className='inc'/>
+                    <Button value='reset'
+                            className='reset'
+                            action={resetValueCounter}
+                    />
                 </div>
             </div>
-            <div className='container-counter'>
-                <div className='counter__display set__display'>
-                    <div>
-                        <span className='set__display-value'> max value </span>
-                        <input type="number"
-                               className={correctInputValue? 'inputMaxValue': 'inputMaxValue incorrectInput'}
-                               value={maxValue}
-                               onChange={changeMaxValue}/>
-                    </div>
-                    <div>
-                        <span className='set__display-value'> start value </span>
-                        <input type="number"
-                               className= {correctInputValue? 'inputStartValue': 'inputStartValue incorrectInput'}
-                               value={startValue}
-                               onChange={changeStartValue}/>
-                    </div>
-                </div>
-                <div className='counter__button'>
-                    <input type='button'
-                           className='reset input_param'
-                           disabled={!correctInputValue}
-                           onClick={setParameters}
-                           value='setParameters'/>
-                </div>
-            </div>
+
+            <SettingsCounter maxValue={maxValue}
+                             correctInputValue={correctInputValue}
+                             changeMaxValue={changeMaxValue}
+                             startValue={startValue}
+                             changeStartValue={changeStartValue}
+                             setParameters={setParameters}/>
         </div>
     )
 }
+
+
 
