@@ -19,7 +19,7 @@ function HW3() {
         }
         setUsers([newUser, ...users]) // need to fix
     }
-    console.log(users);
+    console.log('HW3 ', users);
 
     return (
         <div>
